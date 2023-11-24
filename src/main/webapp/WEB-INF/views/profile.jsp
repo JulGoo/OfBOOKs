@@ -11,7 +11,7 @@
                 <div class="card-header">Profile Picture</div>
                 <div class="card-body text-center">
                     <!-- Profile picture image-->
-                    <img class="img-account-profile rounded-circle mb-2" src="img/단비.png" alt="" width="300px"
+                    <img class="img-account-profile rounded-circle mb-2" src="uploadProfile/${fileName }" alt="" width="300px"
                          height="300px">
                     <!-- Profile picture help block-->
                     <div class="small font-italic text-muted mb-4">JPG or PNG no larger than 5 MB</div>

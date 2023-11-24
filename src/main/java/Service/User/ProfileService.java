@@ -5,7 +5,7 @@ import Service.CommandHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-public class RegisterService implements CommandHandler{
+public class ProfileService implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
@@ -18,13 +18,13 @@ public class RegisterService implements CommandHandler{
 		}
 	}
 
-	// 회원가입 페이지
+	// 프로필 페이지
 	private String processGet(HttpServletRequest request, HttpServletResponse response) {
 		System.out.println("get");
-		return "register";
+		return "profile";
 	}
 
-	// 회원가입 확인 버튼
+	// 프로필 수정
 	private String processPost(HttpServletRequest request, HttpServletResponse response) {
 		response.setContentType("text/html; charset=UTF-8");
 
@@ -36,11 +36,11 @@ public class RegisterService implements CommandHandler{
 
 		System.out.println("post");
 
-		int result = userDAO.register(userID, userPW, userName, userEmail);
+		int result = userDAO.profile(userPW, userName, userEmail, userID);
 		if (result == -1) {
-			return "redirect:register.do?msg=EmptyInput";
+			return "redirect:profile.do?msg==DatabaseError";
 		}else {
-			return "login";
+			return "redirect:profile.do";
 		}
 	}
 

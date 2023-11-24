@@ -5,8 +5,7 @@ public class UserDTO {
 	String userPW;
 	String userName;
 	String userEmail;
-	String userPhone;
-	String userGender;
+	String fileName;
 
 	// Getter & Setter
 	public String getUserID() {
@@ -41,19 +40,11 @@ public class UserDTO {
 		this.userEmail = userEmail;
 	}
 
-	public String getUserPhone() {
-		return userPhone;
+	public String getFileName() {
+		return fileName;
 	}
 
-	public void setUserPhone(String userPhone) {
-		this.userPhone = userPhone;
-	}
-
-	public String getUserGender() {
-		return userGender;
-	}
-
-	public void setUserGender(String userGender) {
-		this.userGender = userGender;
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 }

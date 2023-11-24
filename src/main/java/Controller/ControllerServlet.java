@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import Service.CommandHandler;
 
-@WebServlet(urlPatterns = "*.do", 
+@WebServlet(urlPatterns = "*.do",
 			initParams = {@WebInitParam(name = "config", 
 										value = "/WEB-INF/commandHandler.properties") })
 public class ControllerServlet extends HttpServlet {
@@ -81,7 +81,17 @@ public class ControllerServlet extends HttpServlet {
 		
 		String viewPage = handler.process(request, response);
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/" + viewPage + ".jsp");
-		rd.forward(request, response);
+		System.out.println(viewPage);
+		
+		if(viewPage.startsWith("redirect:")) {
+			String newURL = viewPage.substring(9);
+			System.out.println(newURL);
+			response.sendRedirect(newURL);
+			System.out.println("redirect");
+		}else {
+			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/" + viewPage + ".jsp");
+			rd.forward(request, response);
+			System.out.println("forward");
+		}
 	}
 }
