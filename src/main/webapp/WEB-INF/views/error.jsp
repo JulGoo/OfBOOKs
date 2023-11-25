@@ -24,6 +24,10 @@
 				out.println("<script>alert('오류');history.back();</script>");
 				out.close();
 				break;
+			case "Success":
+				out.println("<script>alert('완료했습니다.');location.href='index.do';</script>");
+				out.close();
+				break;
 		}
 	}
 %>

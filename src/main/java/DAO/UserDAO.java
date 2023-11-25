@@ -12,7 +12,7 @@ public class UserDAO {
 
 	// 회원가입
 	public int register(String userID, String userPW, String userName, String userEmail) {
-		String SQL = "INSERT INTO user_table VALUES (?,?,?,?)";
+		String SQL = "INSERT INTO user_table (userID, userPW, userName, userEmail) VALUES (?,?,?,?)";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 
@@ -67,6 +67,7 @@ public class UserDAO {
 				UserDTO userDTO = new UserDTO();
 				userDTO.setUserID(rs.getString(1));
 				userDTO.setUserName(rs.getString(3));
+				userDTO.setUserEmail(rs.getString(4));
 				userDTO.setFileName(rs.getString(5));
 
 				return userDTO;
@@ -79,15 +80,16 @@ public class UserDAO {
 	}
 
 	// 프로필 수정
-	public int profile(String userPW, String userName, String userEmail, String userID) {
-		String SQL = "UPDATE user_table SET userPW = ?, userName = ?, userEmail = ? where userID = ?";
+	public int profile(String userPW, String userName, String userEmail, String fileName, String userID) {
+		String SQL = "UPDATE user_table SET userPW = ?, userName = ?, userEmail = ?, fileName = ? where userID = ?";
 
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, userPW);
 			pstmt.setString(2, userName);
 			pstmt.setString(3, userEmail);
-			pstmt.setString(4, userID);
+			pstmt.setString(4, fileName);
+			pstmt.setString(5, userID);
 
 			return pstmt.executeUpdate();
 		} catch (Exception e) {

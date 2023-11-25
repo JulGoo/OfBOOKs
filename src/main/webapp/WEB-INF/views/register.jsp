@@ -44,26 +44,26 @@
 								<h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
 							</div>
 							<br>
-							<form class="user" method="post" action="register.do">
+							<form class="user" method="post" action="register.do" name="register">
 								<div class="form-group">
 									<input type="text" class="form-control form-control-user"
-										id="userID" placeholder="ID" style="font-size: 17px;">
+										id="userID" name="userID" placeholder="ID" style="font-size: 17px;">
 								</div>
 
 								<div class="form-group">
 									<input type="text" class="form-control form-control-user"
-										id="userName" placeholder="Name" style="font-size: 17px;">
+										id="userName" name="userName" placeholder="Name" style="font-size: 17px;">
 								</div>
 
 
 								<div class="form-group row">
 									<div class="col-sm-9 mb-3 mb-sm-0">
 										<input type="email" class="form-control form-control-user"
-										id="userEmail" placeholder="E-mail Address"
+										id="userEmail" name="userEmail" placeholder="E-mail Address"
 										style="font-size: 17px;">
 									</div>
 									<div class="col-sm-3 mb-3 mb-sm-0">
-										<button type="button"
+										<button type="button" id="sendEmailBtn" onclick="sendCode();"
 											class="btn btn-primary btn-user btn-block"
 											style="font-size: 17px;">전송</button>
 									</div>
@@ -71,11 +71,11 @@
 								<div class="form-group row">
 									<div class="col-sm-9 mb-3 mb-sm-0">
 										<input type="text" class="form-control form-control-user"
-											id="emailCheck" placeholder="Enter your Code from E-mail"
+											id="chkUserEmail" placeholder="Enter your Code from E-mail"
 											style="font-size: 17px;">
 									</div>
 									<div class="col-sm-3 mb-3 mb-sm-0">
-										<button type="button"
+										<button type="button" id="chkCodeBtn" onclick="checkCode();"
 											class="btn btn-primary btn-user btn-block"
 											style="font-size: 17px;">확인</button>
 									</div>
@@ -85,20 +85,19 @@
 								<div class="form-group row">
 									<div class="col-sm-6 mb-3 mb-sm-0">
 										<input type="password" class="form-control form-control-user"
-											id="userPW" placeholder="Password" style="font-size: 17px;">
+											id="userPW" name="userPW" placeholder="Password" style="font-size: 17px;">
 									</div>
 									<div class="col-sm-6">
 										<input type="password" class="form-control form-control-user"
-											id="reUserPW" placeholder="Repeat Password"
+											id="chkUserPW" placeholder="Repeat Password"
 											style="font-size: 17px;">
 									</div>
 								</div>
 								<br>
 
-								<buttom type="submit" id="register"
+								<input type="button" id="register" onclick="validateR();"
 									class="btn btn-primary btn-user btn-block"
-									style="font-size: 17px;">Register Account</buttom>
-								<hr>
+									style="font-size: 17px;" value="Register Account"/>
 							</form>
 							<hr>
 							<div class="text-center">
@@ -127,6 +126,7 @@
 	<!-- Custom scripts for all pages-->
 	<script src="js/sb-admin-2.min.js"></script>
 
+	<script src="js/register.js"></script>
 </body>
 
 </html>

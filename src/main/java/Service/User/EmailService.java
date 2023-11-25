@@ -13,16 +13,29 @@ import javax.mail.internet.MimeMessage;
 
 import Config.Crypto;
 import Config.GmailConn;
+import Service.CommandHandler;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-public class EmailService {
+public class EmailService implements CommandHandler {
+
+	@Override
+	public String process(HttpServletRequest request, HttpServletResponse response) {
+		String email = request.getParameter("email");
+		return sendEmail(email);
+	}
+
 	public String sendEmail(String UserEmail) {
 		String authKey = Crypto.makeAuthKey();
 		String from = "202244026@itc.ac.kr";
 		String subject = "OfBOOKs 이메일 인증";
 		String content = "";
-		content += "<h2>인증번호입니다.</h2>";
+		content += "<h2>OfBOOKs - 이메일 인증번호</h2>";
+		content += "아래 코드를 입력하세요.<br>";
+		content += "<hr>";
 		content += "인증번호 : ";
 		content += authKey;
+		
 
 		// 지메일 연결 설정
 		Properties p = new Properties();

@@ -18,9 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import Service.CommandHandler;
 
-@WebServlet(urlPatterns = "*.do",
-			initParams = {@WebInitParam(name = "config", 
-										value = "/WEB-INF/commandHandler.properties") })
+@WebServlet(urlPatterns = "*.do", initParams = {
+		@WebInitParam(name = "config", value = "/WEB-INF/commandHandler.properties") })
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -76,19 +75,27 @@ public class ControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String command = request.getRequestURI();
 		command = command.substring(request.getContextPath().length() + 1);
-		
+
 		CommandHandler handler = commandHandlerMap.get(command);
-		
+
 		String viewPage = handler.process(request, response);
-		
+
 		System.out.println(viewPage);
-		
-		if(viewPage.startsWith("redirect:")) {
+
+		// viewpage -> data
+		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+			response.setContentType("text/html;charset=UTF-8");
+			response.getWriter().write(viewPage);
+			return;
+		}
+
+		// viewpage -> page
+		if (viewPage.startsWith("redirect:")) {
 			String newURL = viewPage.substring(9);
 			System.out.println(newURL);
 			response.sendRedirect(newURL);
 			System.out.println("redirect");
-		}else {
+		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/" + viewPage + ".jsp");
 			rd.forward(request, response);
 			System.out.println("forward");

@@ -32,8 +32,8 @@ public class Crypto {
     }
     
     //인증키 6자리 숫자 랜덤 생성
-    public static int makeAuthKey() {
-    	int authKey = ThreadLocalRandom.current().nextInt(100000, 1000000);
+    public static String makeAuthKey() {
+    	String authKey = Integer.toString(ThreadLocalRandom.current().nextInt(100000, 1000000));
     	return authKey;
     }
     

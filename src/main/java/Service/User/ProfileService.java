@@ -1,9 +1,13 @@
 package Service.User;
 
+import javax.mail.Session;
+
 import DAO.UserDAO;
+import DTO.UserDTO;
 import Service.CommandHandler;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 public class ProfileService implements CommandHandler{
 
@@ -20,7 +24,14 @@ public class ProfileService implements CommandHandler{
 
 	// 프로필 페이지
 	private String processGet(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("get");
+		//System.out.println("get");
+		HttpSession session = request.getSession();
+		String id = (String)session.getAttribute("userID");
+		
+		UserDAO userDAO = new UserDAO();
+		UserDTO userDTO = userDAO.logintoSession(id);
+		request.setAttribute("userDTO", userDTO);
+		
 		return "profile";
 	}
 
@@ -33,14 +44,22 @@ public class ProfileService implements CommandHandler{
 		String userPW = request.getParameter("userPW");
 		String userName = request.getParameter("userName");
 		String userEmail = request.getParameter("userEmail");
+		String fileName = request.getParameter("fileName");
 
 		System.out.println("post");
 
-		int result = userDAO.profile(userPW, userName, userEmail, userID);
+		int result = userDAO.profile(userPW, userName, userEmail, fileName, userID);
 		if (result == -1) {
-			return "redirect:profile.do?msg==DatabaseError";
+			return "redirect:profile.do?msg=DatabaseError";
 		}else {
-			return "redirect:profile.do";
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			session.setAttribute("userID", userID);
+			session.setAttribute("userName", userName);
+			session.setAttribute("fileName", fileName);
+			
+			return "redirect:index.do?msg=Success";
 		}
 	}
 
