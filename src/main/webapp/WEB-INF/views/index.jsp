@@ -12,7 +12,7 @@
 			<input class="form-control form-control-lg" id="emailAddressBelow"
 				type="text" placeholder="도서 제목을 입력하세요." style="height: 70px" />+
 			<div class="input-group-append">
-				<button class="btn btn-primary btn-lg" id="submitButton"
+				<button class="btn btn-primary btn-lg" id="submitButton" onclick="location.href='bookInfo.do';"
 					type="submit">
 					검색 <i class="fas fa-search fa-sm"></i>
 				</button>

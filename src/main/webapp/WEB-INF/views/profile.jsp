@@ -6,33 +6,35 @@
 <div class="container-xl px-4 mt-4">
 	<hr class="mt-0 mb-4">
 	<div class="row">
-		<div class="col-xl-4">
-			<!-- Profile picture card-->
-			<div class="card mb-4 mb-xl-0">
-				<div class="card-header">Profile Picture</div>
-				<div class="card-body text-center">
 
-					<!-- Profile picture image-->
-					<img class="img-account-profile rounded-circle mb-2" id="preview"
-						src="uploadProfile/${userDTO.fileName }" alt="" width="300px"
-						height="300px">
+		<form method="post" action="profile.do" name="register" enctype="multipart/form-data">
 
-					<!-- Profile picture help block-->
-					<div class="small font-italic text-muted mb-4">JPG or PNG no
-						larger than 5 MB</div>
+			<div class="col-xl-4">
+				<!-- Profile picture card-->
+				<div class="card mb-4 mb-xl-0">
+					<div class="card-header">Profile Picture</div>
+					<div class="card-body text-center">
 
-					<!-- Profile picture upload button-->
-					<input type="text" readonly /> <input type="file" name="file"
-						onchange="fileProcess(this);" />
+						<!-- Profile picture image-->
+						<img class="img-account-profile rounded-circle mb-2" id="preview"
+							src="uploadProfile/${userDTO.fileName }" alt="" width="300px"
+							height="300px">
+
+						<!-- Profile picture help block-->
+						<div class="small font-italic text-muted mb-4">JPG or PNG no
+							larger than 5 MB</div>
+
+						<!-- Profile picture upload button-->
+						<input type="file" name="file" />
+					</div>
 				</div>
 			</div>
-		</div>
-		<div class="col-xl-8">
-			<!-- Account details card-->
-			<div class="card mb-4">
-				<div class="card-header">Account Details</div>
-				<div class="card-body">
-					<form method="post" action="profile.do" name="register">
+			<div class="col-xl-8">
+				<!-- Account details card-->
+				<div class="card mb-4">
+					<div class="card-header">Account Details</div>
+					<div class="card-body">
+
 						<!-- Form Group (ID)-->
 						<div class="mb-3">
 							<label class="small mb-1" for="userID">ID</label> <input
@@ -81,10 +83,11 @@
 						<!-- Save changes button-->
 						<input type="button" id="saveProfile" onclick="validateR();"
 							class="btn btn-primary" style="font-size: 17px;" value="저장" />
-					</form>
+
+					</div>
 				</div>
 			</div>
-		</div>
+		</form>
 	</div>
 </div>
 

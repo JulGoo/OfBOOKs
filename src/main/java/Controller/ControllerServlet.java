@@ -31,7 +31,7 @@ public class ControllerServlet extends HttpServlet {
 		String configFile = config.getInitParameter("config");
 		Properties prop = new Properties();
 		String configFilePath = config.getServletContext().getRealPath(configFile);
-
+		
 		try (FileInputStream fis = new FileInputStream(configFilePath)) {
 			prop.load(fis);
 		} catch (IOException e) {

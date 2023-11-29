@@ -61,12 +61,12 @@ String userIDs = (String) session.getAttribute("userID");
 			<hr class="sidebar-divider">
 
 			<!-- Nav Item - Charts -->
-			<li class="nav-item"><a class="nav-link" href="charts.html">
+			<li class="nav-item"><a class="nav-link" href="bookMap.do">
 					<i class="fas fa-fw fa-chart-area"></i> <span>도서관맵</span>
 			</a></li>
 
 			<!-- Nav Item - Tables -->
-			<li class="nav-item"><a class="nav-link" href="tables.html">
+			<li class="nav-item"><a class="nav-link" href="board.do">
 					<i class="fas fa-fw fa-table"></i> <span>질문게시판</span>
 			</a></li>
 

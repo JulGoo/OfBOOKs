@@ -1,7 +1,6 @@
-<%@page import="DAO.UserDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@include file="header_copy.jsp"%>
+<%@include file="header.jsp"%>
 
 <div class="container-fluid">
 	<!-- 도서 정보 -->
@@ -46,7 +45,7 @@
 				var container = document.getElementById('map');
 				var options = {
 					center : new kakao.maps.LatLng(37.570758, 126.966893),
-					level : 7
+					level : 3
 				};
 
 				var map = new kakao.maps.Map(container, options);
@@ -72,4 +71,4 @@
 	</div>
 </div>
 
-<%@include file="footer_copy.jsp"%>
+<%@include file="footer.jsp"%>
