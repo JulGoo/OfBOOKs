@@ -11,7 +11,7 @@ public class ProfileService implements CommandHandler{
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("aaaa");
+		//System.out.println("aaaa");
 		if ("GET".equals(request.getMethod())) {
 			return processGet(request, response);
 		} else if ("POST".equals(request.getMethod())) {
@@ -37,7 +37,7 @@ public class ProfileService implements CommandHandler{
 
 	// 프로필 수정
 	private String processPost(HttpServletRequest request, HttpServletResponse response) {
-		System.out.println("cccc");
+		//System.out.println("cccc");
 		response.setContentType("text/html; charset=UTF-8");
 
 		String folder = "/uploadProfile";

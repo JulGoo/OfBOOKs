@@ -40,17 +40,17 @@
 
 				<%
 				//System.out.println(userID);
-				System.out.println(boardDTO.getUserID());
-				
-				if (userID !=null && userID.equals(boardDTO.getUserID())) {
+				//System.out.println(boardDTO.getUserID());
+
+				if (userID != null && userID.equals(boardDTO.getUserID())) {
 				%>
 
 				<button type="button" class="btn btn-danger btn-lg" id="BtnDelete"
-					onclick="location.href='boardUpdate.do';"
+					onclick="confirmBbsDelete(<%=boardDTO.getBbsNo() %>);"
 					style="margin-bottom: 15px; float: right;">삭제</button>
 
 				<button type="button" class="btn btn-primary btn-lg" id="BtnUpdate"
-					onclick="location.href='boardUpdate.do';"
+					onclick="location.href='boardUpdate.do?bbsNo=<%=boardDTO.getBbsNo() %>';"
 					style="margin-bottom: 15px; float: right; margin-right: 10px;">수정</button>
 
 				<%
@@ -66,5 +66,7 @@
 
 </div>
 <!-- End of Main Content -->
+
+<script src="js/confirm.js"></script>
 
 <%@include file="footer.jsp"%>

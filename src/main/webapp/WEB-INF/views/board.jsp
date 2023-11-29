@@ -4,6 +4,12 @@
 	pageEncoding="UTF-8"%>
 <%@include file="header.jsp"%>
 
+<style>
+tr.selectedTR:hover{
+background-color:aliceblue;
+}
+</style>
+
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
@@ -22,12 +28,11 @@
 	<div class="card shadow mb-4">
 		<div class="card-body">
 			<div class="table-responsive">
-				<table class="table table-bordered" id="dataTable" width="100%"
-					cellspacing="0">
+				<table class="table table-bordered" id="dataTable" style="color:black">
 					<thead>
-						<tr>
+						<tr class="table-primary">
 							<th>번호</th>
-							<th>제목</th>
+							<th style="width:50%">제목</th>
 							<th>작성자</th>
 							<th>작성일</th>
 						</tr>
@@ -36,7 +41,7 @@
                             for (int i = 0; i < boardList.size(); i++) {
                     %>
 					<tbody onclick="location.href='boardDetail.do?bbsNo=<%=boardList.get(i).getBbsNo() %>'">
-						<tr>
+						<tr class="selectedTR">
 							<td><%=boardList.get(i).getBbsNo() %></td>
 							<td><%=boardList.get(i).getTitle() %></td>
 							<td><%=boardList.get(i).getUserID() %></td>

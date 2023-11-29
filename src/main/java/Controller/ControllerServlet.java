@@ -80,7 +80,7 @@ public class ControllerServlet extends HttpServlet {
 
 		String viewPage = handler.process(request, response);
 
-		System.out.println(viewPage);
+		System.out.println("viewPage: " + viewPage);
 
 		// viewpage -> data
 		if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
@@ -92,13 +92,13 @@ public class ControllerServlet extends HttpServlet {
 		// viewpage -> page
 		if (viewPage.startsWith("redirect:")) {
 			String newURL = viewPage.substring(9);
-			System.out.println(newURL);
+			//System.out.println(newURL);
 			response.sendRedirect(newURL);
-			System.out.println("redirect");
+			//System.out.println("redirect");
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/" + viewPage + ".jsp");
 			rd.forward(request, response);
-			System.out.println("forward");
+			//System.out.println("forward");
 		}
 	}
 }

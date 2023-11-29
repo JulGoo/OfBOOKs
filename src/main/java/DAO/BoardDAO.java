@@ -30,8 +30,8 @@ public class BoardDAO {
 	}
 
 	// 게시글 수정
-	public int update(int bbsNo, String title, String content, String fileName) {
-		String SQL = "UPDATE board_table SET title =?, content = ?,fileName = ? Where bbsNo = ?";
+	public int update(String title, String content, String fileName, int bbsNo) {
+		String SQL = "UPDATE board_table SET title = ?, content = ?,fileName = ? Where bbsNo = ?";
 		try {
 			PreparedStatement pstmt = conn.prepareStatement(SQL);
 			pstmt.setString(1, title);
@@ -99,6 +99,7 @@ public class BoardDAO {
 			rs = pstmt.executeQuery();
 
 			if (rs.next()) {
+				boardDTO.setBbsNo(rs.getInt(1));
 				boardDTO.setTitle(rs.getString(2));
 				boardDTO.setContent(rs.getString(3));
 				boardDTO.setUserID(rs.getString(4));
