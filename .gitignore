@@ -1,4 +1,6 @@
 GmailConn.*
-BookInfoService.*
-bookMap.*
 BookAPI.*
+LibraryAPI.*
+
+bookMap.*
+bookInfo.*

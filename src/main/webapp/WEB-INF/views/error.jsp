@@ -28,6 +28,10 @@
 				out.println("<script>alert('완료했습니다.');location.href='index.do';</script>");
 				out.close();
 				break;
+			case "NoLogin":
+				out.println("<script>alert('로그인 후 이용해주세요.');location.href='login.do';</script>");
+				out.close();
+				break;
 		}
 	}
 %>

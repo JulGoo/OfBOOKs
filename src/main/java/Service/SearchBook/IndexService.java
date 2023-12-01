@@ -15,8 +15,8 @@ public class IndexService implements CommandHandler{
 		}
 	}
 	
+	//메인 도석 검색 화면
 	private String processGet(HttpServletRequest request, HttpServletResponse response) {
-		
 		return "index";
 	}
 

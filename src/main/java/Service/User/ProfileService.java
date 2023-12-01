@@ -24,7 +24,7 @@ public class ProfileService implements CommandHandler{
 	// 프로필 페이지
 	private String processGet(HttpServletRequest request, HttpServletResponse response) {
 		//System.out.println("get");
-		System.out.println("bbbb");
+		//System.out.println("bbbb");
 		HttpSession session = request.getSession();
 		String id = (String)session.getAttribute("userID");
 		
