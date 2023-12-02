@@ -6,9 +6,8 @@
 <div class="container-xl px-4 mt-4">
 	<hr class="mt-0 mb-4">
 	<div class="row">
-
-		<form method="post" action="profile.do" name="register" enctype="multipart/form-data">
-
+		<form method="post" action="profile.do" name="register"
+			enctype="multipart/form-data" style="width: 100%; display:flex">
 			<div class="col-xl-4">
 				<!-- Profile picture card-->
 				<div class="card mb-4 mb-xl-0">
@@ -25,7 +24,7 @@
 							larger than 5 MB</div>
 
 						<!-- Profile picture upload button-->
-						<input type="file" name="file" />
+						<input type="file" name="fileName" />
 					</div>
 				</div>
 			</div>

@@ -9,8 +9,8 @@
 
 <%
 BookDTO bookDTO = (BookDTO) request.getAttribute("bookDTO");
-
 ArrayList<LibraryDTO> list = (ArrayList<LibraryDTO>) request.getAttribute("libraryDTOList");
+String userID = (String) session.getAttribute("userID");
 
 Date datetime = bookDTO.getDatetime();
 SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy년 MM월 dd일");
@@ -19,11 +19,13 @@ String formattedDate = dateFormat.format(datetime);
 %>
 
 <link href="css/comment.css" rel="stylesheet">
+<script type="text/javascript" src="js/like.js"></script>
+
 
 <div class="container-fluid">
 	<!-- 도서 정보 -->
 	<div class="card shadow mb-4">
-		<div class="card-header py-3">
+		<div class="card-header py-3" style="display: flex;">
 			<h6 class="m-0 font-weight-bold text-primary">도서 정보</h6>
 		</div>
 		<div class="card-body">
@@ -35,7 +37,7 @@ String formattedDate = dateFormat.format(datetime);
 							class="img-fluid rounded-start"
 							style="width: 300px; height: 435px;">
 					</div>
-					<div class="col-md-5">
+					<div class="col-md-8">
 						<div class="card-body">
 							<h3 class="card-title" style="font-weight: bold"><%=bookDTO.getTitle()%></h3>
 							<br>
@@ -64,12 +66,23 @@ String formattedDate = dateFormat.format(datetime);
 							</table>
 						</div>
 					</div>
+					<div class="col-md-1">
+						<input type="text" id="isbn" value="<%=bookDTO.getIsbn() %>" style="display:none;">
+						<button class="btn btn-outline-danger" style="float: right"
+							id="likeBtn" onclick="likeAction(<%=bookDTO.getIsbn() %>);">
+							추천 +<span id="likeCount">${likeCnt }</span>
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 
 	<!-- 도서관 정보 -->
+	<!-- 소장 도서관 정보가 없을 경우 소장 도서관 div 생략 -->
+	<%
+	if (!list.isEmpty()) {
+	%>
 	<div class="card shadow mb-4">
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">서울특별시 소장 도서관</h6>
@@ -105,13 +118,12 @@ String formattedDate = dateFormat.format(datetime);
 		</div>
 
 		<div id="map"
-			style="width: 1000px; height: 500px; margin:50px 0 70px 300px"></div>
+			style="width: 1000px; height: 500px; margin: 50px 0 70px 300px"></div>
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=cf00b9fe7782ac5083b85fcad53a301f"></script>
 		<script>
                 var container = document.getElementById('map');
                 var options = {
-                    center: new kakao.maps.LatLng(35, 128),
                     center: new kakao.maps.LatLng(<%=list.get(0).getLatitude()%>, <%=list.get(0).getLongitude()%>),
                     
                     level: 8
@@ -121,12 +133,16 @@ String formattedDate = dateFormat.format(datetime);
 
                 var positions = [];
 
-                <%for (int i = 0; i < list.size(); i++) {%>
+                <%
+                for (int i = 0; i < list.size(); i++) {
+                %>
                 positions[<%=i%>] = {
                         content: '<div style="font-weight:bold; font-size:larger;"><%=list.get(i).getLibName()%></div>',
                         latlng: new kakao.maps.LatLng(<%=list.get(i).getLatitude()%>, <%=list.get(i).getLongitude()%>)
                     };
-		<%}%>
+				<%
+				}
+				%>
 			for (var i = 0; i < positions.length; i++) {
 				// 마커를 생성합니다
 				var marker = new kakao.maps.Marker({
@@ -162,8 +178,9 @@ String formattedDate = dateFormat.format(datetime);
 				};
 			}
 		</script>
-	</div>
 
+	</div>
+	<%} %>
 
 	<!-- 리뷰 -->
 	<div class="card shadow mb-4">
@@ -191,11 +208,18 @@ String formattedDate = dateFormat.format(datetime);
 						<div class="media-block"
 							style="display: flex; flex-direction: row;">
 							<img class="img-circle img-sm" alt="Profile Picture"
-								style="margin-right: 40px" src="uploadProfile/${r.profileImg }"></a>
+								style="margin-right: 40px" src="uploadProfile/${r.fileName }"></a>
 							<div class="media-body">
 								<div class="mar-btm" style="font-weight:bold">
 									${r.userID }
 									<p class="text-muted text-sm">${r.date }</p>
+									
+								<c:if test="${r.userID.equals(userID) }">
+								<button class="btn btn-sm btn-danger pull-right" type="submit"
+								onclick="confirmReviewDelete(${r.reviewNo}, ${r.isbn });"
+								style="float: right">삭제</button>
+								</c:if>
+								
 								</div>
 								<p style="color:black">${r.comment }</p>
 							</div>

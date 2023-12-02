@@ -17,7 +17,7 @@ BoardDTO boardDTO = (BoardDTO) request.getAttribute("boardDTO");
 	<!-- DataTales Example -->
 	<div class="card shadow mb-4">
 		<div class="card-body">
-			<form method="post" action="boardUpdate.do">
+			<form method="post" action="boardUpdate.do" enctype="multipart/form-data">
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">
 

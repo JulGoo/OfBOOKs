@@ -33,7 +33,7 @@
 					</tr>
 					<tr>
 						<td style="font-weight: bold; font-size: larger; color: black;">첨부파일</td>
-						<td><%=boardDTO.getFileName()%></td>
+						<td><img src="uploadProfile/<%=boardDTO.getFileName()%>" width="500px"></td>
 					</tr>
 					</tbody>
 				</table>
@@ -66,7 +66,5 @@
 
 </div>
 <!-- End of Main Content -->
-
-<script src="js/confirm.js"></script>
 
 <%@include file="footer.jsp"%>

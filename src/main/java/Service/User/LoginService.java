@@ -3,9 +3,10 @@ package Service.User;
 import DAO.UserDAO;
 import DTO.UserDTO;
 import Service.CommandHandler;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class LoginService implements CommandHandler {
 
@@ -36,7 +37,9 @@ public class LoginService implements CommandHandler {
 		UserDAO userDAO = new UserDAO();
 		String userID = request.getParameter("userID");
 		String userPW = request.getParameter("userPW");
-
+		
+		String coco = request.getParameter("coco");
+		
 		//System.out.println("post");
 
 		int result = userDAO.login(userID, userPW);
@@ -45,9 +48,16 @@ public class LoginService implements CommandHandler {
 		case 1:
 			UserDTO udto = userDAO.logintoSession(userID);
 			
+			//세션에 값 저장
 			session.setAttribute("userID", udto.getUserID());
 			session.setAttribute("userName", udto.getUserName());
 			session.setAttribute("fileName", udto.getFileName());
+			
+			//로그인 정보 저장 체크 시 쿠키 저장
+			if(coco != null) {
+				Cookie cookie = new Cookie("id", udto.getUserID());
+				response.addCookie(cookie);
+			}
 			
 			return "index";
 		// 비밀번호 오류

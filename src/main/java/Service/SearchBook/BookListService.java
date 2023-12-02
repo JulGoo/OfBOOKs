@@ -10,8 +10,8 @@ import org.json.simple.parser.JSONParser;
 import Config.BookAPI;
 import DTO.BookDTO;
 import Service.CommandHandler;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class BookListService implements CommandHandler {
 	@Override

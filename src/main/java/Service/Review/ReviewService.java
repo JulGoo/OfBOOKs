@@ -1,11 +1,10 @@
-package Service.Board;
+package Service.Review;
 
-import DAO.BoardDAO;
 import DAO.ReviewDAO;
 import Service.CommandHandler;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class ReviewService implements CommandHandler{
 
@@ -24,18 +23,20 @@ public class ReviewService implements CommandHandler{
 
 	//댓글 작성
 	private String processPost(HttpServletRequest request, HttpServletResponse response) {
+		response.setContentType("text/html; charset=UTF-8");
+		
 		HttpSession session = request.getSession();
 		
 		ReviewDAO reviewDAO = new ReviewDAO();
 		String isbn = request.getParameter("isbn");
 		String userID = (String) session.getAttribute("userID");	
 		if (userID == null) {
-			return "redirect:bookInfo.do?msg=NoLogin";			
+			return "redirect:bookInfo.do?msg=NoLogin";
 		}
-		String profileImg = (String) session.getAttribute("fileName");
+		String fileName = (String) session.getAttribute("fileName");
 		String comment = request.getParameter("comment");
 		
-		int result = reviewDAO.write(isbn, userID, comment, profileImg);
+		int result = reviewDAO.write(isbn, userID, comment, fileName);
 		if(result == -1) {
 			return "redirect:bookInfo.do?msg=DatabaseError";
 		}else {

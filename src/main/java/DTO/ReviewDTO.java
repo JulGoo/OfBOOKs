@@ -16,5 +16,5 @@ public class ReviewDTO {
 	String comment;
 	Date date;
 	int available;
-	String profileImg;
+	String fileName;
 }

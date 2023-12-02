@@ -61,7 +61,7 @@
 										<div class="form-group">
 											<div class="custom-control custom-checkbox small">
 												<input type="checkbox" class="custom-control-input"
-													id="customCheck"> <label
+													id="customCheck" value="yes" name="coco"> <label
 													class="custom-control-label" for="customCheck" style="font-size: 15px;">Remember
 													Me</label>
 											</div>

@@ -11,15 +11,14 @@ import org.json.simple.parser.JSONParser;
 
 import Config.BookAPI;
 import Config.LibraryAPI;
-import DAO.BoardDAO;
+import DAO.LikeDAO;
 import DAO.ReviewDAO;
-import DTO.BoardDTO;
 import DTO.BookDTO;
 import DTO.LibraryDTO;
 import DTO.ReviewDTO;
 import Service.CommandHandler;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class BookInfoService implements CommandHandler {
 	@Override
@@ -181,8 +180,15 @@ public class BookInfoService implements CommandHandler {
 		
 		/*** 댓글 목록 가져오기 ***/
 		ReviewDAO reviewDAO = new ReviewDAO();
-		ArrayList<ReviewDTO> reviewDTOList = reviewDAO.getReviewList();	
+		ArrayList<ReviewDTO> reviewDTOList = reviewDAO.getReviewList(paramIsbn);	
+		
 		request.setAttribute("reviewDTOList", reviewDTOList);
+		
+		/*** 추천 총 개수 가져오기 ***/
+		LikeDAO likeDAO = new LikeDAO();
+		int likeCnt = likeDAO.likeCount(paramIsbn);
+		
+		request.setAttribute("likeCnt", likeCnt);
 
 		return "bookInfo";
 	}

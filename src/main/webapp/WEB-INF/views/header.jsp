@@ -1,9 +1,39 @@
+<%@page import="DAO.UserDAO"%>
+<%@page import="DTO.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="error.jsp"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="utf-8">
+
+<%
+// 세션이 null일 때(로그인이 안되어있을때) 쿠키를 이용한 로그인 처리
+if(session.getAttribute("userID") == null) {
+	Cookie[] cookies = request.getCookies();
+	if (cookies != null && cookies.length > 0) {
+		for (Cookie c : cookies) {
+			if (c.getName().equals("id")) {
+				session.setAttribute("userID", c.getValue());
+				
+				String userID = c.getValue();
+				
+				UserDAO userDAO = new UserDAO();
+				UserDTO userDTO = userDAO.logintoSession(userID);
+				
+				String userName = userDTO.getUserName();
+				String fileName = userDTO.getFileName();
+				
+				session.setAttribute("userName", userName);
+				session.setAttribute("fileName", fileName);
+				
+				out.println("<script>location.reload();</script>");
+			}
+		}
+	}
+}
+%>
+
 
 <%-- 세션에 userID 저장 --%>
 <%
@@ -28,9 +58,15 @@ String userIDs = (String) session.getAttribute("userID");
 	rel="stylesheet">
 <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script src="js/confirm.js"></script>
+
+
+
 </head>
 
-<body id="page-top">
+<body id="page-top" style="margin-top: 0px">
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
@@ -43,17 +79,17 @@ String userIDs = (String) session.getAttribute("userID");
 			<!-- Sidebar - Brand -->
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="index.do">
-				<img src="img/logo.png" width="200px" height="65px">
+				href="index.do"> <img src="img/logo.png" width="200px"
+				height="65px">
 			</a>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">
 
 			<!-- Nav Item - Dashboard -->
-			<li class="nav-item active"><a class="nav-link"
-				href="index.do"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>도서
-						검색</span></a></li>
+			<li class="nav-item active"><a class="nav-link" href="index.do">
+					<i class="fas fa-fw fa-tachometer-alt"></i> <span>도서 검색</span>
+			</a></li>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider">
@@ -64,8 +100,8 @@ String userIDs = (String) session.getAttribute("userID");
 			</a></li>
 
 			<!-- Nav Item - Tables -->
-			<li class="nav-item"><a class="nav-link" href="board.do">
-					<i class="fas fa-fw fa-table"></i> <span>질문게시판</span>
+			<li class="nav-item"><a class="nav-link" href="board.do"> <i
+					class="fas fa-fw fa-table"></i> <span>질문게시판</span>
 			</a></li>
 
 			<!-- Divider -->
@@ -99,8 +135,8 @@ String userIDs = (String) session.getAttribute("userID");
 					<form method="get" action="bookList.do"
 						class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 						<div class="input-group">
-							<input type="text" class="form-control bg-light border-0 small" name="title"
-								placeholder="도서 제목" aria-label="Search"
+							<input type="text" class="form-control bg-light border-0 small"
+								name="title" placeholder="도서 제목" aria-label="Search"
 								aria-describedby="basic-addon2">
 							<div class="input-group-append">
 								<button class="btn btn-primary" type="submit">
@@ -154,10 +190,11 @@ String userIDs = (String) session.getAttribute("userID");
 							class="nav-link dropdown-toggle" href="#" id="userDropdown"
 							role="button" data-toggle="dropdown" aria-haspopup="true"
 							aria-expanded="false"> <%--로그인 정보--%> <span
-								class="mr-2 d-none d-lg-inline text-gray-600" style="font: black; font-weight:bold;">
-									${userName} </span> <img class="img-profile rounded-circle"
+								class="mr-2 d-none d-lg-inline text-gray-600"
+								style="font: black; font-weight: bold;"> ${userName} </span> <img
+								class="img-profile rounded-circle"
 								src="uploadProfile/${fileName }">
-							
+
 						</a> <!-- Dropdown - User Information -->
 							<div
 								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"

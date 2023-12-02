@@ -7,3 +7,13 @@ function confirmBbsDelete(bbsNo){
             return;
         }
 }
+
+function confirmReviewDelete(reviewNo, isbn){
+	var confirmYes = confirm('정말 삭제하시겠습니까?');
+
+        if (confirmYes) {
+            location.href = 'reviewDelete.do?reviewNo=' + reviewNo + '&isbn=' + isbn;
+        } else {
+            return;
+        }
+}

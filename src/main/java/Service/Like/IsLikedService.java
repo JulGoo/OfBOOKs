@@ -1,11 +1,12 @@
-package Service.Board;
+package Service.Like;
 
-import DAO.BoardDAO;
+import DAO.LikeDAO;
 import Service.CommandHandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-public class BoardDeleteService implements CommandHandler {
+public class IsLikedService implements CommandHandler {
 
 	@Override
 	public String process(HttpServletRequest request, HttpServletResponse response) {
@@ -16,19 +17,21 @@ public class BoardDeleteService implements CommandHandler {
 		}
 	}
 
-	// 게시글 삭제
 	private String processGet(HttpServletRequest request, HttpServletResponse response) {
-		BoardDAO boardDAO = new BoardDAO();
-		int bbsNo = Integer.parseInt(request.getParameter("bbsNo"));
-		
-		int result = boardDAO.delete(bbsNo);
-		if(result == -1) {
-			return "redirect:boardDetail.do?msg=DatabaseError";
-		}
-		return "redirect:board.do";
+		HttpSession session = request.getSession();
+
+		String isbn = request.getParameter("isbn");
+		String userID = (String) session.getAttribute("userID");
+
+		LikeDAO likeDAO = new LikeDAO();
+		// 추천 상태 확인
+		boolean result = likeDAO.isLiked(isbn, userID);
+		String isLiked = result?"1":"0";
+
+		return isLiked;
 	}
 
 	private String processPost(HttpServletRequest request, HttpServletResponse response) {
-		return "board";
+		return "redirect:bookInfo.do";
 	}
 }
