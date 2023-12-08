@@ -29,11 +29,11 @@
 					</tr>
 					<tr>
 						<td style="font-weight: bold; font-size: larger; color: black;">내용</td>
-						<td style="height: 350px"><%=boardDTO.getContent()%></td>
+						<td style="height: 200px"><%=boardDTO.getContent()%></td>
 					</tr>
 					<tr>
 						<td style="font-weight: bold; font-size: larger; color: black;">첨부파일</td>
-						<td><img src="uploadProfile/<%=boardDTO.getFileName()%>" width="500px"></td>
+						<td><img src="uploadProfile/<%=boardDTO.getFileName()%>" width="1200px"></td>
 					</tr>
 					</tbody>
 				</table>

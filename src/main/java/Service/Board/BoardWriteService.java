@@ -52,7 +52,10 @@ public class BoardWriteService implements CommandHandler {
 			if (result == -1) {
 				return "redirect:boardWrite.do?msg=DatabaseError";
 			} else {
-				return "redirect:boardDetail.do";
+				//bbsNo 마지막 값 가져오기
+				int bbsNo = boardDAO.getLastBbsNo();
+				System.out.println();
+				return "redirect:boardDetail.do?bbsNo=" + bbsNo;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -26,7 +26,23 @@ public class BoardDAO {
 			e.printStackTrace();
 		}
 		return -1; // 데이터베이스 오류
+	}
+	
+	//게시글 저장 시 마지막 번호(bbsNo) 가져오기
+	public int getLastBbsNo() {
+		String SQL = "SELECT MAX(bbsNo) from board_table";
+		ResultSet rs;
+		try {
+			PreparedStatement pstmt = conn.prepareStatement(SQL);
+			rs = pstmt.executeQuery();
 
+			if (rs.next()) {
+				return rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
 	}
 
 	// 게시글 수정

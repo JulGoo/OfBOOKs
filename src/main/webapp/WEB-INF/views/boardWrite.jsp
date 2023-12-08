@@ -5,8 +5,6 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
 
-
-
 	<!-- Page Heading -->
 	<h1 class="h3 mb-2 text-gray-800">문의게시판</h1>
 	<p class="mb-4">질문을 등록해주세요. 3~5일내로 답변드리겠습니다.</p>
@@ -17,7 +15,6 @@
 			<form method="post" action="boardWrite.do" enctype="multipart/form-data">
 				<div class="table-responsive">
 					<table class="table table-bordered" id="dataTable">
-
 						<tr>
 							<td style="font-weight: bold; font-size: larger; color: black;">제목</td>
 							<td><input type="text" class="form-control border-0"
